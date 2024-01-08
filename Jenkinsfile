@@ -15,7 +15,7 @@ pipeline {
     stage('Generate war file') {
       steps{
         script {
-          sh 'jar -cvf test.war *'
+          bat 'jar -cvf test.war *'
         }
       }
     }
