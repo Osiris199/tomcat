@@ -7,7 +7,7 @@ pipeline {
     stage('SCM Checkout') {
       steps{
         script {
-          git branch: 'master', credentialsId: 'siddhatech_test', url: 'https://github.com/RaghavendraPrabhu/siddhatechtest.git'
+          git branch: 'master', credentialsId: 'siddhatech_test', url: 'https://github.com/Osiris199/tomcat.git'
         }
       }
     }
