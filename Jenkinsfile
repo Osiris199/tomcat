@@ -22,7 +22,7 @@ pipeline {
 
     stage('Build image') {
       steps{
-        dir(${env.WORKSPACE}){
+        dir("${env.WORKSPACE}"){
           bat "docker build -t tomcat ."
       }
       }
