@@ -22,9 +22,9 @@ pipeline {
 
     stage('Build image') {
       steps{
-        script {
-          dockerImage = docker.build("testwarfile", "-f ${env.WORKSPACE}\Dockerfile .")
-        }
+        dir(${env.WORKSPACE}){
+          bat "docker build -t tomcat ."
+      }
       }
     }
 
