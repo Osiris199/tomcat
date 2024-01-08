@@ -1,4 +1,4 @@
-FROM tomcat
+FROM tomcat:9.0
 
 COPY test.war /usr/local/tomcat/webapps/
 
