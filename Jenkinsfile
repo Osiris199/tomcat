@@ -14,10 +14,14 @@ pipeline {
     stage('Stop all container') {
       steps{
         script {
-          if(checkOsLinux()){
-              sh "docker ps -q | xargs docker stop"
-            } else {
-              bat '''for /f "tokens=*" %%i in ('docker ps -q') do (docker stop %%i)'''
+          try {
+              if(checkOsLinux()){
+                sh "docker ps -q | xargs docker stop"
+              } else {
+                bat '''for /f "tokens=*" %%i in ('docker ps -q') do (docker stop %%i)'''
+              }
+          } catch (Exception e) {
+              echo "entered catch block"       
           }
         }
       }
