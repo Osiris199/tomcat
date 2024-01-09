@@ -11,6 +11,18 @@ pipeline {
 
   stages {
 
+    stage('Stop all container') {
+      steps{
+        script {
+          if(checkOsLinux()){
+              sh 'docker stop $(docker ps -a -q)'
+            } else {
+              bat 'docker stop $(docker ps -a -q)'
+          }
+        }
+      }
+    }
+
     stage('SCM Checkout') {
       steps{
         script {
