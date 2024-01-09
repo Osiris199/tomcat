@@ -14,8 +14,8 @@ pipeline {
     stage('Stop all container') {
       steps{
         script {
+          def container = sh "docker ps -a -q"
           if(checkOsLinux()){
-              def container = sh "docker ps -a -q"
               sh "docker stop ${container}"
             } else {
               bat "docker stop ${container}"
