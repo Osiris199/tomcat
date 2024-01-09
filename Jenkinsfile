@@ -22,21 +22,13 @@ pipeline {
       steps{
         script {
             if(checkOsLinux()){
-              sh 'jar -cvf test.war *'
+              sh 'jar -cvf soapUI_services.war *'
             } else {
-              bat 'jar -cvf test.war *'
+              bat 'jar -cvf soapUI_services.war *'
             }
         }
       }
     }
-
-    // stage('Build image') {
-    //   steps{
-    //     dir("${env.WORKSPACE}"){
-    //       bat "docker build -t tomcat ."
-    //   }
-    //   }
-    // }
 
     stage('Build image') {
       steps{
@@ -65,7 +57,7 @@ pipeline {
             } else {
               withCredentials([string(credentialsId: 'Dockerhub_credential', variable: 'dockerhub_pwd')]) {
                 bat "docker login -u vaibhavx7 -p ${dockerhub_pwd}"
-                bat "docker push ${dockerimagename}"
+                bat "docker push ${dockerimagename}:1.0"
               }
             }
         }
@@ -76,9 +68,9 @@ pipeline {
       steps {
         script {
           if(checkOsLinux()){
-              sh "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}"
+              sh "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}:latest"
           } else {
-              bat "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}"
+              bat "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}:1.0"
           }
         }
       }
