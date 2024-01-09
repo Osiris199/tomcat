@@ -1,4 +1,4 @@
-FROM tomcat:8.0-alpine
+FROM tomcat:8-jdk8-temurin-focal
 
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 
