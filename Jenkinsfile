@@ -41,7 +41,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE}/Dockerfile .")
+          dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE} .")
         }
       }
     }
