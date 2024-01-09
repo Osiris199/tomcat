@@ -15,9 +15,10 @@ pipeline {
       steps{
         script {
           if(checkOsLinux()){
-              sh "docker stop ${docker ps -a -q}"
+              def container = sh "docker ps -a -q"
+              sh "docker stop ${container}"
             } else {
-              bat "docker stop ${docker ps -a -q}"
+              bat "docker stop ${container}"
           }
         }
       }
