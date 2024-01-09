@@ -5,6 +5,7 @@ pipeline {
     dockerimagename = "vaibhavx7/tomcat-soapui"
     dockerImage = ""
     buildNumber = "${currentBuild.number}"
+    container = ""
   }
 
   agent any
@@ -14,7 +15,6 @@ pipeline {
     stage('Stop all container') {
       steps{
         script {
-          def container
           if(checkOsLinux()){
               container = sh "docker ps -a -q"
             } else {
