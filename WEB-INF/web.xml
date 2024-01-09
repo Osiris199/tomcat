@@ -11,7 +11,7 @@
         <init-param>
             <description>project file path</description>
             <param-name>projectFile</param-name>
-            <param-value>WEB-INF/soapui/mock-all-services-soapui-project.xml</param-value>
+            <param-value>WEB-INF/soapui/siddhatechtest.xml</param-value>
         </init-param>
         <init-param>
             <description>enable Web UI</description>
@@ -41,7 +41,7 @@
         <init-param>
             <description>set MockService endpoint used in generated WSDLs and schemas</description>
             <param-name>mockServiceEndpoint</param-name>
-            <param-value>http://localhost:8085/Test</param-value>
+            <param-value>http://localhost:9090/test</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
