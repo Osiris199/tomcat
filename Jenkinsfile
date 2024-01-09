@@ -37,7 +37,7 @@ pipeline {
               dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE}/Dockerfile .")
           } else {
                dir("${env.WORKSPACE}"){
-                  bat "docker build -t ${dockerimagename} ."
+                  bat "docker build -t ${dockerimagename}:1.0 ."
                }
           }
         }
@@ -68,7 +68,7 @@ pipeline {
       steps {
         script {
           if(checkOsLinux()){
-              sh "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}:latest"
+              sh "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}t"
           } else {
               bat "docker run -d --name tomcat -p 9090:8080 ${dockerimagename}:1.0"
           }
