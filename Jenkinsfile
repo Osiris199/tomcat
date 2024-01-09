@@ -18,7 +18,7 @@ pipeline {
           if(checkOsLinux()){
               container = sh(returnStdout: true, script: 'docker ps -a -q')
             } else {
-              container = bat(returnStdout: true, script: 'docker ps -a -q')
+              bat '''docker ps -q | ForEach-Object { docker stop $_ }'''
           }
           if(checkOsLinux()){
               sh "docker stop ${container}"
