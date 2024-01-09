@@ -41,7 +41,13 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE}/Dockerfile .")
+          if(checkOsLinux()){
+              dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE}/Dockerfile .")
+          } else {
+               dir("${env.WORKSPACE}"){
+                  bat "docker build -t ${dockerimagename} ."
+               }
+          }
         }
       }
     }
@@ -51,9 +57,16 @@ pipeline {
           registryCredential = 'Docker_Hub_cred'
       }
       steps{
-        script {
-            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
+          script {
+            if(checkOsLinux()){
+              docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+              dockerImage.push("latest")
+            } else {
+              withCredentials([string(credentialsId: 'Dockerhub_credential', variable: 'dockerhub_pwd')]) {
+                bat "docker login -u vaibhavx7 -p ${dockerhub_pwd}"
+                bat "docker push ${dockerimagename}"
+              }
+            }
           }
         }
       }
