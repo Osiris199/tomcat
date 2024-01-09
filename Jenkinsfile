@@ -85,7 +85,7 @@ pipeline {
       steps {
         script {
           if(checkOsLinux()){
-              sh "docker run -d --name tomcat_${buildNumber} -p 9090:8080 ${dockerimagename}t"
+              sh "docker run -d --name tomcat_${buildNumber} -p 9090:8080 ${dockerimagename}"
           } else {
               bat "docker run -d --name tomcat_${buildNumber} -p 9090:8080 ${dockerimagename}:${buildNumber}"
           }
