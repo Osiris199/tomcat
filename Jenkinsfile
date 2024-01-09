@@ -59,15 +59,15 @@ pipeline {
       steps{
           script {
             if(checkOsLinux()){
-              docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-              dockerImage.push("latest")
+                docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+                dockerImage.push("latest")
+              }
             } else {
               withCredentials([string(credentialsId: 'Dockerhub_credential', variable: 'dockerhub_pwd')]) {
                 bat "docker login -u vaibhavx7 -p ${dockerhub_pwd}"
                 bat "docker push ${dockerimagename}"
               }
             }
-          }
         }
       }
     }
