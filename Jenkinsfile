@@ -4,7 +4,7 @@ pipeline {
     HOME = "${env.WORKSPACE}"
     dockerimagename = "vaibhavx7/tomcat-soapui"
     dockerImage = ""
-    buildNumber = currentBuild.number
+    def buildNumber = currentBuild.number
   }
 
   agent any
