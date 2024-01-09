@@ -1,4 +1,4 @@
-FROM tomcat
+FROM tomcat:9.0.84-jdk8-corretto-al2
 
 RUN mv /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/
 
